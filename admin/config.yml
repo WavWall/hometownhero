@@ -1,0 +1,1331 @@
+backend:
+  name: git-gateway
+  accept_roles:
+    - admin
+    - editor
+  branch: master
+media_folder: theme/assets/images
+public_folder: /assets/images
+collections:
+  - name: pages
+    label: Pages
+    identifier_field: title
+    extension: md
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    folder: cms/pages
+    fields:
+      - label: Title
+        name: title
+        widget: string
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '{{slug}}.html'
+      - &ref_0
+        label: Seo
+        name: seo
+        widget: object
+        collapsed: true
+        fields:
+          - label: Title
+            name: title
+            widget: string
+            required: false
+          - label: Description
+            name: description
+            widget: string
+            required: false
+          - label: No index
+            name: noindex
+            widget: boolean
+            default: false
+            required: false
+          - label: Open Graph Title
+            name: og:title
+            widget: string
+            required: false
+          - label: Open Graph Image
+            name: og:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Twitter Title
+            name: twitter:title
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Card
+            name: twitter:card
+            widget: string
+            default: summary
+            required: false
+          - label: Twitter Site
+            name: twitter:site
+            widget: string
+            required: false
+          - label: Twitter Creator
+            name: twitter:creator
+            widget: string
+            required: false
+          - label: Twitter Image
+            name: twitter:image
+            widget: image
+            required: false
+            media_library:
+              config:
+                multiple: false
+          - label: Additional HTML tags
+            name: additional_tags
+            widget: text
+            required: false
+  - name: events
+    label: Events
+    folder: cms/events
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_flyer
+        label: Flyer
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_link
+        label: Link
+        widget: string
+        required: false
+      - hint: ''
+        name: f_date
+        label: Date
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: events
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[events].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: news
+    label: News
+    folder: cms/news
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_text
+        label: Text
+        widget: text
+        required: false
+      - hint: ''
+        name: f_date-2
+        label: Date
+        widget: datetime
+        required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: news
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[news].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: videos
+    label: Videos
+    folder: cms/videos
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_video-thumbnail
+        label: Video Thumbnail
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_episode
+        label: Episode
+        widget: number
+        required: false
+      - hint: ''
+        name: f_ex-episode-1
+        label: ex. Episode 1
+        widget: string
+        required: false
+      - hint: ''
+        name: f_video-description
+        label: Video Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_youtube-video
+        label: Youtube Video
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Url
+            widget: string
+            required: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: videos
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[videos].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: series
+    label: Series
+    folder: cms/series
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_series-image
+        label: Series Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_series-description
+        label: Series Description
+        widget: text
+        required: false
+      - hint: ''
+        name: f_videos
+        label: Videos
+        widget: relation
+        required: false
+        collection: videos
+        value_field: cms/videos/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: series
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[series].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - name: shop
+    label: Shops
+    folder: cms/shop
+    create: true
+    identifier_field: name
+    extension: md
+    slug: '{{slug}}'
+    fields:
+      - hint: ''
+        name: title
+        label: Name
+        widget: string
+        required: true
+      - hint: ''
+        name: created-on
+        label: Created On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: updated-on
+        label: Updated On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: published-on
+        label: Published On
+        widget: datetime
+        required: false
+      - hint: ''
+        name: f_image
+        label: Image
+        widget: object
+        required: false
+        fields:
+          - hint: ''
+            name: url
+            label: Image
+            widget: image
+            required: false
+            allow_multiple: false
+          - hint: Image Alt
+            name: alt
+            label: alt
+            widget: string
+            required: false
+      - hint: ''
+        name: f_pricing
+        label: Pricing
+        widget: string
+        required: false
+      - hint: ''
+        name: f_related-items
+        label: Related Items
+        widget: relation
+        required: false
+        collection: shop
+        value_field: cms/shop/{{slug}}.md
+        search_fields:
+          - slug
+          - name
+        display_fields:
+          - title
+        multiple: true
+      - hint: ''
+        name: f_product-id
+        label: Product ID
+        widget: string
+        required: false
+      - hint: ''
+        name: f_new-release
+        label: New Release
+        widget: boolean
+        required: false
+        default: false
+      - label: Tags
+        widget: hidden
+        name: tags
+        default: shop
+      - label: Layout
+        widget: hidden
+        name: layout
+        default: '[shop].html'
+      - label: Publish Date
+        name: date
+        widget: datetime
+      - *ref_0
+  - label: Theme Settings
+    name: settings
+    identifier_field: title
+    extension: json
+    create: false
+    delete: false
+    slug: '{{slug}}'
+    editor:
+      preview: false
+    files:
+      - label: General
+        name: site
+        file: cms/_data/settings/site.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: General
+          - hint: Full domain url (needed for a correct sitemap file)
+            name: domain
+            label: Domain
+            widget: string
+            required: false
+          - name: favicon
+            label: Favicon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: apple_touch_icon
+            label: Apple Touch Icon
+            widget: image
+            allow_multiple: false
+            required: false
+          - name: header_additional_content
+            label: Additional Content Header
+            hint: Content here will be placed before </head> tag
+            widget: text
+            required: false
+          - name: footer_additional_content
+            label: Additional Content Footer
+            hint: Content here will be placed before </body> tag
+            widget: text
+            required: false
+          - name: images_optimization
+            label: Images Optimization
+            widget: object
+            collapsed: false
+            fields:
+              - label: Image Formats
+                name: formats
+                widget: select
+                multiple: true
+                options:
+                  - label: Avif
+                    value: avif
+                  - label: Webp
+                    value: webp
+              - label: Image Dimensions
+                name: dimensions
+                widget: select
+                multiple: true
+                options:
+                  - label: '500'
+                    value: 500
+                  - label: '800'
+                    value: 800
+                  - label: '1080'
+                    value: 1080
+                  - label: '1600'
+                    value: 1600
+                  - label: '2000'
+                    value: 2000
+                  - label: '2600'
+                    value: 2600
+      - label: Colors
+        name: colors
+        file: cms/_data/colors.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Colors
+      - label: Texts
+        name: texts
+        file: cms/_data/texts.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Texts
+          - hint: 'Original text: X, key: 58'
+            label: Text
+            name: '58'
+            widget: string
+          - hint: 'Original text: A Breakdown Of Impact, key: -6f2ece0f'
+            label: Text
+            name: '-6f2ece0f'
+            widget: string
+          - hint: >-
+              Original text: The breakdown of impact is a guide to be of help in
+              your everyday life. It is written the with the raw feelings of how
+              Ashton Burrell breaks down the word IMPACT. This book is
+              encouraging and uplifting to people all over this world. We all go
+              through this thing called life so let’s make our IMPACT while we
+              are here!, key: -2e0bae0e
+            label: Text
+            name: '-2e0bae0e'
+            widget: text
+          - hint: 'Original text: Available Now!, key: 4651ab42'
+            label: Text
+            name: 4651ab42
+            widget: string
+          - hint: 'Original text: Purchase, key: 6bc36921'
+            label: Text
+            name: 6bc36921
+            widget: string
+          - hint: 'Original text: Enter The Club, key: 2ab723ad'
+            label: Text
+            name: 2ab723ad
+            widget: string
+          - hint: >-
+              Original text: Gain access to the Hometown Hero newsletter. Just
+              enter your information below and your in the club!, key: 39717916
+            label: Text
+            name: '39717916'
+            widget: text
+          - hint: >-
+              Original text: Thank you! Your submission has been received!, key:
+              5a0ea5a1
+            label: Text
+            name: 5a0ea5a1
+            widget: string
+          - hint: >-
+              Original text: Oops! Something went wrong while submitting the
+              form., key: -7c112e99
+            label: Text
+            name: '-7c112e99'
+            widget: string
+          - hint: 'Original text: HOMETOWN, key: 11b9c7f1'
+            label: Text
+            name: 11b9c7f1
+            widget: string
+          - hint: 'Original text: HERO, key: 21c7fa'
+            label: Text
+            name: 21c7fa
+            widget: string
+          - hint: 'Original text: DONATE, key: 78873e6f'
+            label: Text
+            name: 78873e6f
+            widget: string
+          - hint: 'Original text: SERVICES, key: -7f24ffa2'
+            label: Text
+            name: '-7f24ffa2'
+            widget: string
+          - hint: 'Original text: TEAM HERO, key: -661b9023'
+            label: Text
+            name: '-661b9023'
+            widget: string
+          - hint: 'Original text: SHOP, key: 26d2f6'
+            label: Text
+            name: 26d2f6
+            widget: string
+          - hint: 'Original text: GOFUNDME, key: -613abdfb'
+            label: Text
+            name: '-613abdfb'
+            widget: string
+          - hint: 'Original text: HOMETOWN HERO, key: 4b6f3ec9'
+            label: Text
+            name: 4b6f3ec9
+            widget: string
+          - hint: 'Original text: Building Community, key: -1a3d8e83'
+            label: Text
+            name: '-1a3d8e83'
+            widget: string
+          - hint: 'Original text: Connecting Brands To Local Leaders., key: 1585bd72'
+            label: Text
+            name: 1585bd72
+            widget: string
+          - hint: 'Original text: Work With Us, key: -62057db7'
+            label: Text
+            name: '-62057db7'
+            widget: string
+          - hint: 'Original text: HOMETOWN , key: 257f364f'
+            label: Text
+            name: 257f364f
+            widget: string
+          - hint: 'Original text: HERO , key: 4173766'
+            label: Text
+            name: '4173766'
+            widget: string
+          - hint: "Original text: It takes a village to raise a child and teach them how to grow into productive members of society. \_By giving the next generation solid examples of what it takes to reach the next level in life is important and cant be replaced. Though positive association we are providing the steps and guidance to development the next generation of Hometown Heroes . To have closer communities our local leaders must receive the credit and attention needed to inspire children to grow up and value our everyday heroes, that to \_often goes without receiving the proper credit., key: 6c658348"
+            label: Text
+            name: 6c658348
+            widget: text
+          - hint: 'Original text: WHAT WE DO, key: -508e913f'
+            label: Text
+            name: '-508e913f'
+            widget: string
+          - hint: 'Original text: Youth Programs, key: 7b4f695c'
+            label: Text
+            name: 7b4f695c
+            widget: string
+          - hint: >-
+              Original text: Children are the future and the foundation of our
+              society. Give us the opportunity to create programs on behalf of
+              your organization that will impact the youth for generations to
+              come., key: -7505c94c
+            label: Text
+            name: '-7505c94c'
+            widget: text
+          - hint: 'Original text: CONTACT, key: 6382b000'
+            label: Text
+            name: 6382b000
+            widget: string
+          - hint: 'Original text: Mentorship Training, key: -1cc763e3'
+            label: Text
+            name: '-1cc763e3'
+            widget: string
+          - hint: >-
+              Original text: Building culture is a process. Allow our team of
+              experts to help develop the leaders in your organization to better
+              serve the local community., key: 54fe71ac
+            label: Text
+            name: 54fe71ac
+            widget: text
+          - hint: 'Original text: Brand Consulting, key: 478386ef'
+            label: Text
+            name: 478386ef
+            widget: string
+          - hint: >-
+              Original text: Expand your brand and expand your impact at the
+              same time. Get in contact with us so that we can create a
+              customized brand strategy for your organization., key: e932042
+            label: Text
+            name: e932042
+            widget: text
+          - hint: 'Original text: Event Planning, key: -7e5cad9d'
+            label: Text
+            name: '-7e5cad9d'
+            widget: string
+          - hint: >-
+              Original text: Events are a great way to convey a precise message
+              to the masses all at once. Let us help your organization from
+              start to finish create a gathering a like minds that will help
+              propel your companies vision and future endeavors., key: 35c97a49
+            label: Text
+            name: 35c97a49
+            widget: text
+          - hint: 'Original text: Previous Partnerships, key: 2610d078'
+            label: Text
+            name: 2610d078
+            widget: string
+          - hint: 'Original text: WORK WITH US, key: -48c469d7'
+            label: Text
+            name: '-48c469d7'
+            widget: string
+          - hint: >-
+              Original text: Find out how we can help build your brand in the
+              community., key: e0154a1
+            label: Text
+            name: e0154a1
+            widget: string
+          - hint: 'Original text: FIRST NAME, key: 119ca21b'
+            label: Text
+            name: 119ca21b
+            widget: string
+          - hint: 'Original text: LAST NAME, key: 1c6105d5'
+            label: Text
+            name: 1c6105d5
+            widget: string
+          - hint: 'Original text: EMAIL, key: 3f0537c'
+            label: Text
+            name: 3f0537c
+            widget: string
+          - hint: 'Original text: STATE, key: 4b8cc71'
+            label: Text
+            name: 4b8cc71
+            widget: string
+          - hint: 'Original text: ZIP CODE, key: 2536f3ac'
+            label: Text
+            name: 2536f3ac
+            widget: string
+          - hint: 'Original text: Select For Speaking Request, key: 527e545a'
+            label: Text
+            name: 527e545a
+            widget: string
+          - hint: 'Original text: PHONE NUMBER, key: -24201a5'
+            label: Text
+            name: '-24201a5'
+            widget: string
+          - hint: 'Original text: Team Hero, key: 696d03dd'
+            label: Text
+            name: 696d03dd
+            widget: string
+          - hint: >-
+              Original text: One is good but more is better. Join the team and
+              find out how you can be apart of building local communities with
+              community., key: -37ee3c5b
+            label: Text
+            name: '-37ee3c5b'
+            widget: text
+          - hint: 'Original text: MORE DETAILS, key: -33bd7a9'
+            label: Text
+            name: '-33bd7a9'
+            widget: string
+          - hint: 'Original text: Shoot Hoops Not Guns, key: 5c35f736'
+            label: Text
+            name: 5c35f736
+            widget: string
+          - hint: >-
+              Original text: Shoot Guns Not Hoops is our signature multi city
+              basketball youth program to help combat gun violence throughout
+              inner city communities. Explore how you can join us for our next
+              event., key: 5d8005a4
+            label: Text
+            name: 5d8005a4
+            widget: text
+          - hint: 'Original text: Public Speaking, key: 73689ea7'
+            label: Text
+            name: 73689ea7
+            widget: string
+          - hint: >-
+              Original text: Ashton Burrell is the Founder of Hometown Hero and
+              has spent the entirety of his adult life motivating people to
+              achieve. Find out how to can book Ashton for your next event
+              below., key: 60895337
+            label: Text
+            name: '60895337'
+            widget: text
+          - hint: 'Original text: SPEAKING REQUEST, key: 52c5e91f'
+            label: Text
+            name: 52c5e91f
+            widget: string
+          - hint: 'Original text: WATCH VIDEO, key: -6d048256'
+            label: Text
+            name: '-6d048256'
+            widget: string
+          - hint: 'Original text: Shop & Support, key: 165f3d2b'
+            label: Text
+            name: 165f3d2b
+            widget: string
+          - hint: >-
+              Original text: Purchase some merchandise and support a cause.
+              Every dollar earned is another dollar to invest into our
+              communities., key: -7370993e
+            label: Text
+            name: '-7370993e'
+            widget: text
+          - hint: 'Original text: SHOP NOW, key: 1a08228c'
+            label: Text
+            name: 1a08228c
+            widget: string
+          - hint: 'Original text: SOCIAL, key: -6de4f493'
+            label: Text
+            name: '-6de4f493'
+            widget: string
+          - hint: 'Original text: info@hometownhero.com, key: 12a651d0'
+            label: Text
+            name: 12a651d0
+            widget: string
+          - hint: 'Original text: Originals, key: 6b90d0a2'
+            label: Text
+            name: 6b90d0a2
+            widget: string
+          - hint: 'Original text: Shop, key: 274f16'
+            label: Text
+            name: 274f16
+            widget: string
+          - hint: 'Original text: SITE CREATED BY, key: -149ae0d8'
+            label: Text
+            name: '-149ae0d8'
+            widget: string
+          - hint: 'Original text: www.myydesign.com, key: 43a37d47'
+            label: Text
+            name: 43a37d47
+            widget: string
+          - hint: 'Original text: HOME, key: 21ecdf'
+            label: Text
+            name: 21ecdf
+            widget: string
+          - hint: >-
+              Original text: Select For Details & Purchasing Options, key:
+              -316f8df1
+            label: Text
+            name: '-316f8df1'
+            widget: string
+          - hint: 'Original text: No items found., key: 3d503d2b'
+            label: Text
+            name: 3d503d2b
+            widget: string
+          - hint: 'Original text: JOIN THE TEAM, key: 2c232b02'
+            label: Text
+            name: 2c232b02
+            widget: string
+          - hint: 'Original text: Keep Scrolling, key: -73a884e6'
+            label: Text
+            name: '-73a884e6'
+            widget: string
+          - hint: >-
+              Original text: Team Hero was establish by Ashton Burrell with the
+              premise of creating opportunities in communities that are often
+              overlooked and under funded., key: -72b94e4e
+            label: Text
+            name: '-72b94e4e'
+            widget: text
+          - hint: >-
+              Original text: Over the years with the help of community leaders
+              around the country and countless donations Team Hero has been able
+              to establish community programs, initiatives, & events that have
+              impacted thousands., key: -31d80897
+            label: Text
+            name: '-31d80897'
+            widget: text
+          - hint: >-
+              Original text: Be the change and find out how you can contribute
+              to Team Hero below., key: -4743bc21
+            label: Text
+            name: '-4743bc21'
+            widget: string
+          - hint: >-
+              Original text: Submit a donation of your choosing. All proceeds go
+              towards funding local events, initiatives, and programs created by
+              Team Hero., key: -304bd141
+            label: Text
+            name: '-304bd141'
+            widget: text
+          - hint: 'Original text: SUBMIT DONATION, key: -7772c166'
+            label: Text
+            name: '-7772c166'
+            widget: string
+          - hint: 'Original text: JOIN, key: 22d52a'
+            label: Text
+            name: 22d52a
+            widget: string
+          - hint: >-
+              Original text: Be the change in your community. Team Hero is
+              always looking to expand and partner with local leaders. Contact
+              us today to see how you can join Team Hero and host one of our
+              programs in your community., key: 4c5f011c
+            label: Text
+            name: 4c5f011c
+            widget: text
+          - hint: 'Original text: CONTACT US, key: 253fd2be'
+            label: Text
+            name: 253fd2be
+            widget: string
+          - hint: 'Original text: ORIGINALS, key: -65c93f5e'
+            label: Text
+            name: '-65c93f5e'
+            widget: string
+          - hint: 'Original text: YOU MAY ALSO LIKE:, key: 6b4315e6'
+            label: Text
+            name: 6b4315e6
+            widget: string
+          - hint: 'Original text: WATCH NOW, key: -6aab683b'
+            label: Text
+            name: '-6aab683b'
+            widget: string
+          - hint: 'Original text: SHOOT HOOPS NOT GUNS, key: d790f16'
+            label: Text
+            name: d790f16
+            widget: string
+          - hint: >-
+              Original text: Shoot Hoops Not Guns is a basketball program
+              created by Hometown Hero. The focus of this program is to negate
+              gun violence in inner city communities., key: -164571
+            label: Text
+            name: '-164571'
+            widget: text
+          - hint: >-
+              Original text: With in just a few years this program has expanded
+              to multiple cities around the country., key: 3233cdf5
+            label: Text
+            name: 3233cdf5
+            widget: string
+          - hint: >-
+              Original text: See how you can intend one of our next events
+              below., key: f72dd4
+            label: Text
+            name: f72dd4
+            widget: string
+      - label: Links
+        name: links
+        file: cms/_data/links.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Links
+          - hint: >-
+              Original link:
+              https://www.amazon.com/Breakdown-Impact-Encouraging-Guide-Help/dp/1537276255,
+              key: -2bd71d85
+            label: Link
+            name: '-2bd71d85'
+            widget: string
+          - hint: 'Original link: /, key: 2f'
+            label: Link
+            name: 2f
+            widget: string
+          - hint: >-
+              Original link: https://thehbcufoundation.org/donate, key:
+              -71922859
+            label: Link
+            name: '-71922859'
+            widget: string
+          - hint: 'Original link: #What-We-Do, key: 426e8024'
+            label: Link
+            name: '426e8024'
+            widget: string
+          - hint: 'Original link: /team-hero/, key: -44afa28c'
+            label: Link
+            name: '-44afa28c'
+            widget: string
+          - hint: 'Original link: /shop/, key: 56b9492a'
+            label: Link
+            name: 56b9492a
+            widget: string
+          - hint: >-
+              Original link: https://www.gofundme.com/f/livementorship, key:
+              -58a17bd
+            label: Link
+            name: '-58a17bd'
+            widget: string
+          - hint: 'Original link: #Contact, key: -30472183'
+            label: Link
+            name: '-30472183'
+            widget: string
+          - hint: 'Original link: /shoot-hoops/, key: 7916061'
+            label: Link
+            name: '7916061'
+            widget: string
+          - hint: 'Original link: #, key: 23'
+            label: Link
+            name: '23'
+            widget: string
+          - hint: 'Original link: http://www.instagram.com, key: 68b7b95c'
+            label: Link
+            name: 68b7b95c
+            widget: string
+          - hint: 'Original link: http://www.twitter.com, key: -5ba5d2a3'
+            label: Link
+            name: '-5ba5d2a3'
+            widget: string
+          - hint: 'Original link: http://www.facebook.com, key: 71fe362'
+            label: Link
+            name: 71fe362
+            widget: string
+          - hint: 'Original link: http://www.youtube.com, key: ccbd60d'
+            label: Link
+            name: ccbd60d
+            widget: string
+          - hint: 'Original link: http://www.myydesign.com, key: dfdf975'
+            label: Link
+            name: dfdf975
+            widget: string
+      - label: Images
+        name: images
+        file: cms/_data/images.json
+        fields:
+          - label: Title
+            name: title
+            widget: hidden
+            default: Images
+          - label: Image
+            name: 79ed281c
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i68fb7fd7
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 57b4bf12
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: i690a1378
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 5cdfec92
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2973f369'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '15042489'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 59e3a528
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 3e0eccda
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1558b197'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 25d6656a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-6844bf3b'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2ab2ca1a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '0'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-1eaadb43'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-512e5d1a'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 79c2cb51
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 79d0f91a
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 79df109b
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: '-2ee6bcb3'
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 599d2fa3
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2a2a0b45
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+          - label: Image
+            name: 2a0ddc43
+            widget: object
+            fields:
+              - name: url
+                label: Image Url
+                widget: image
+                allow_multiple: false
+                required: false
+              - name: alt
+                label: Image Alt
+                widget: string
+                required: false
+publish_mode: editorial_workflow
